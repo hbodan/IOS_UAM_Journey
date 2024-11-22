@@ -17,7 +17,7 @@ class RegisterViewController: UIViewController {
         let label = UILabel()
         label.text = "Register View"
         label.frame = CGRect(x: 100, y: 200, width: 200, height: 50)
-        label.textAlignment = .center
+        label.textAlignment = .right
         
         self.view.addSubview(label)
     }
