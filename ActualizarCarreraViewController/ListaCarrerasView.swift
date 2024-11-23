@@ -16,6 +16,17 @@ struct ListaCarrerasView: View {
 
     @Environment(\.managedObjectContext) private var viewContext
 
+    init() {
+        // Configuración de la barra de navegación
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.black]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black]
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        UINavigationBar.appearance().compactAppearance = appearance
+    }
+
     var body: some View {
         NavigationView {
             VStack {
@@ -30,33 +41,63 @@ struct ListaCarrerasView: View {
                             NavigationLink(
                                 destination: ActualizarCarreraView(carrera: carrera),
                                 label: {
-                                    VStack(alignment: .leading, spacing: 5) {
-                                        Text(carrera.nombre ?? "Sin nombre")
-                                            .font(.headline)
-                                            .foregroundColor(.primary)
-                                        Text(carrera.departamento ?? "Sin departamento")
-                                            .font(.subheadline)
-                                            .foregroundColor(.secondary)
-                                    }
+                                    carreraBox(carrera: carrera)
                                 }
                             )
                         }
                         .onDelete(perform: eliminarCarreras)
                     }
+                    .listStyle(PlainListStyle())
                 }
             }
             .navigationTitle("Carreras Universitarias")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: agregarCarrera) {
-                        Label("Agregar Carrera", systemImage: "plus")
-                    }
+                    agregarCarreraButton
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
                     EditButton()
+                        .foregroundColor(.teal)
                 }
             }
         }
+    }
+
+    // Botón estilizado para agregar carreras
+    private var agregarCarreraButton: some View {
+        Button(action: agregarCarrera) {
+            HStack {
+                Image(systemName: "plus")
+                Text("Agregar Carrera")
+            }
+            .font(.headline)
+            .foregroundColor(.white)
+            .padding()
+            .background(Color.teal)
+            .cornerRadius(10)
+            .shadow(color: .teal.opacity(0.4), radius: 4, x: 0, y: 2)
+        }
+    }
+
+    // Diseño estilizado para cada box de carrera
+    @ViewBuilder
+    private func carreraBox(carrera: CustomCarrera) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(carrera.nombre ?? "Sin nombre")
+                .font(.system(size: 20, weight: .bold))
+                .foregroundColor(.black)
+
+            Text(carrera.departamento ?? "Sin departamento")
+                .font(.system(size: 16, weight: .medium))
+                .foregroundColor(.gray)
+
+            Divider()
+                .background(Color.gray.opacity(0.5))
+        }
+        .padding()
+        .background(Color.white)
+        .cornerRadius(12)
+        .shadow(color: .gray.opacity(0.4), radius: 4, x: 0, y: 2)
     }
 
     private func agregarCarrera() {
