@@ -3,7 +3,7 @@
 //  UAMJourney
 //
 //  Created by User-UAM on 11/15/24.
-//
+// prueba
 import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
