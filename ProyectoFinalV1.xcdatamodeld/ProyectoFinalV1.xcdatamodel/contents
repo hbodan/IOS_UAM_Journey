@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23231" systemVersion="23G93" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CustomCarrera" representedClassName="CustomCarrera" syncable="YES">
+        <attribute name="departamento" optional="YES" attributeType="String"/>
+        <attribute name="descripcion" optional="YES" attributeType="String"/>
+        <attribute name="imagen" optional="YES" attributeType="Binary"/>
+        <attribute name="masInformacion" optional="YES" attributeType="String"/>
+        <attribute name="nombre" optional="YES" attributeType="String"/>
+        <attribute name="oportunidadesLaborales" optional="YES" attributeType="String"/>
+        <attribute name="perfilEgresado" optional="YES" attributeType="String"/>
+        <attribute name="planEstudios" optional="YES" attributeType="String"/>
+        <attribute name="requisitosIngreso" optional="YES" attributeType="String"/>
+    </entity>
+</model>
