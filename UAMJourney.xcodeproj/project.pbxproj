@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A5D6AD12CF2758C0014A604 /* BindingExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5D6AD02CF2758C0014A604 /* BindingExtensions.swift */; };
+		2A5D6AD52CF2759D0014A604 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5D6AD32CF2759D0014A604 /* ContentView.swift */; };
+		2A5D6AD72CF275CB0014A604 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5D6AD62CF275CB0014A604 /* Persistence.swift */; };
+		2A5D6ADB2CF275E10014A604 /* ActualizarCarreraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5D6AD82CF275E10014A604 /* ActualizarCarreraView.swift */; };
+		2A5D6ADC2CF275E10014A604 /* ListaCarrerasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5D6AD92CF275E10014A604 /* ListaCarrerasView.swift */; };
+		2A5D6ADF2CF276470014A604 /* ProyectoFinalV1.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2A5D6ADD2CF276470014A604 /* ProyectoFinalV1.xcdatamodeld */; };
+		2A5D6AE42CF2767C0014A604 /* CustomCarrera+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5D6AE22CF2767C0014A604 /* CustomCarrera+CoreDataClass.swift */; };
+		2A5D6AE52CF2767C0014A604 /* CustomCarrera+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5D6AE32CF2767C0014A604 /* CustomCarrera+CoreDataProperties.swift */; };
 		77C938752CE871CD006AFCA1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C938742CE871CD006AFCA1 /* AppDelegate.swift */; };
 		77C938772CE871CD006AFCA1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C938762CE871CD006AFCA1 /* SceneDelegate.swift */; };
 		77C938792CE871CD006AFCA1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C938782CE871CD006AFCA1 /* ViewController.swift */; };
@@ -40,6 +48,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2A5D6AD02CF2758C0014A604 /* BindingExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingExtensions.swift; sourceTree = "<group>"; };
+		2A5D6AD32CF2759D0014A604 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2A5D6AD62CF275CB0014A604 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		2A5D6AD82CF275E10014A604 /* ActualizarCarreraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActualizarCarreraView.swift; sourceTree = "<group>"; };
+		2A5D6AD92CF275E10014A604 /* ListaCarrerasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListaCarrerasView.swift; sourceTree = "<group>"; };
+		2A5D6ADE2CF276470014A604 /* ProyectoFinalV1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ProyectoFinalV1.xcdatamodel; sourceTree = "<group>"; };
+		2A5D6AE22CF2767C0014A604 /* CustomCarrera+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomCarrera+CoreDataClass.swift"; sourceTree = "<group>"; };
+		2A5D6AE32CF2767C0014A604 /* CustomCarrera+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomCarrera+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		77C938712CE871CD006AFCA1 /* UAMJourney.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UAMJourney.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77C938742CE871CD006AFCA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		77C938762CE871CD006AFCA1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,9 +100,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2A5D6ADA2CF275E10014A604 /* ActualizarCarreraViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2A5D6AD82CF275E10014A604 /* ActualizarCarreraView.swift */,
+				2A5D6AD92CF275E10014A604 /* ListaCarrerasView.swift */,
+			);
+			path = ActualizarCarreraViewController;
+			sourceTree = "<group>";
+		};
 		77C938682CE871CD006AFCA1 = {
 			isa = PBXGroup;
 			children = (
+				2A5D6AE22CF2767C0014A604 /* CustomCarrera+CoreDataClass.swift */,
+				2A5D6AE32CF2767C0014A604 /* CustomCarrera+CoreDataProperties.swift */,
+				2A5D6ADD2CF276470014A604 /* ProyectoFinalV1.xcdatamodeld */,
+				2A5D6ADA2CF275E10014A604 /* ActualizarCarreraViewController */,
 				77C938A52CE8CF2A006AFCA1 /* RegisterViewController */,
 				77C938A42CE8CEFF006AFCA1 /* LoginViewcontroller */,
 				77C938732CE871CD006AFCA1 /* UAMJourney */,
@@ -149,6 +178,9 @@
 		77C938A52CE8CF2A006AFCA1 /* RegisterViewController */ = {
 			isa = PBXGroup;
 			children = (
+				2A5D6AD62CF275CB0014A604 /* Persistence.swift */,
+				2A5D6AD32CF2759D0014A604 /* ContentView.swift */,
+				2A5D6AD02CF2758C0014A604 /* BindingExtensions.swift */,
 				77C938AC2CE8CFB9006AFCA1 /* RegisterViewController.swift */,
 				77C938AD2CE8CFB9006AFCA1 /* RegisterViewController.xib */,
 			);
@@ -219,7 +251,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1320;
-				LastUpgradeCheck = 1320;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					77C938702CE871CD006AFCA1 = {
 						CreatedOnToolsVersion = 13.2.1;
@@ -288,10 +320,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A5D6AD72CF275CB0014A604 /* Persistence.swift in Sources */,
 				77C938A82CE8CF6E006AFCA1 /* LoginViewController.swift in Sources */,
+				2A5D6ADB2CF275E10014A604 /* ActualizarCarreraView.swift in Sources */,
+				2A5D6ADC2CF275E10014A604 /* ListaCarrerasView.swift in Sources */,
+				2A5D6AD12CF2758C0014A604 /* BindingExtensions.swift in Sources */,
+				2A5D6AD52CF2759D0014A604 /* ContentView.swift in Sources */,
 				77C938AE2CE8CFB9006AFCA1 /* RegisterViewController.swift in Sources */,
 				77C938792CE871CD006AFCA1 /* ViewController.swift in Sources */,
+				2A5D6AE42CF2767C0014A604 /* CustomCarrera+CoreDataClass.swift in Sources */,
+				2A5D6AE52CF2767C0014A604 /* CustomCarrera+CoreDataProperties.swift in Sources */,
 				77C938752CE871CD006AFCA1 /* AppDelegate.swift in Sources */,
+				2A5D6ADF2CF276470014A604 /* ProyectoFinalV1.xcdatamodeld in Sources */,
 				77C938772CE871CD006AFCA1 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -352,6 +392,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -385,6 +426,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -413,6 +455,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -446,6 +489,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -521,7 +565,6 @@
 		77C9389F2CE871D1006AFCA1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -540,7 +583,6 @@
 		77C938A02CE871D1006AFCA1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -559,7 +601,6 @@
 		77C938A22CE871D1006AFCA1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -576,7 +617,6 @@
 		77C938A32CE871D1006AFCA1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -630,6 +670,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		2A5D6ADD2CF276470014A604 /* ProyectoFinalV1.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2A5D6ADE2CF276470014A604 /* ProyectoFinalV1.xcdatamodel */,
+			);
+			currentVersion = 2A5D6ADE2CF276470014A604 /* ProyectoFinalV1.xcdatamodel */;
+			path = ProyectoFinalV1.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 77C938692CE871CD006AFCA1 /* Project object */;
 }

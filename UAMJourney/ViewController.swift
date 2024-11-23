@@ -5,7 +5,7 @@
 //  Created by User-UAM on 11/15/24.
 //
 import UIKit
-
+import SwiftUI
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -79,8 +79,21 @@ class ViewController: UIViewController {
     }
     
     @objc func navigateToLogin() {
-        let loginVC = LoginViewController()
-        self.present(loginVC, animated: true, completion: nil)
+        //let loginVC = LoginViewController()
+        //self.present(loginVC, animated: true, completion: nil)
+        // Crear una instancia del contexto de Core Data
+        let viewContext = PersistenceController.shared.container.viewContext
+
+
+           // Crear la vista SwiftUI
+           let listaCarrerasView = ListaCarrerasView()
+               .environment(\.managedObjectContext, viewContext)
+
+           // Crear un UIHostingController para la vista SwiftUI
+           let hostingController = UIHostingController(rootView: listaCarrerasView)
+
+           // Presentar el hostingController
+           self.present(hostingController, animated: true, completion: nil)
     }
     
     @objc func navigateToRegister() {
