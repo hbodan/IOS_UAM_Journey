@@ -10,7 +10,7 @@ import SwiftUI
 
 
 
-class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate {
+class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     let FacultadesyCarreras = [
         "Ciencias Administrativas y Económicas",
@@ -38,6 +38,10 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     let oportunidadesLaboralesPlaceHolder = UILabel()
     let requisitosIngresoPlaceHolder = UILabel()
     let enlaceInformacionPlaceHolder = UILabel()
+    
+    let uploadImageButton = UIButton(type: .system)
+    let imageUploadView = UIImageView()
+    var selectedImageURL: URL?
     
     let registerButton = UIButton(type: .system)
     
@@ -175,7 +179,7 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         
         //Imagen Jaguar
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "jaguar_Logo-removebg")
+        imageView.image = UIImage(named: "image")
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(imageView)
@@ -190,131 +194,148 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         
         
         //Configurar el campo de texto para facultad
-                facultadTextField.placeholder = "Selecciona una facultad"
-                facultadTextField.borderStyle = .roundedRect
-                facultadTextField.translatesAutoresizingMaskIntoConstraints = false
-                contentView.addSubview(facultadTextField)
-                
-                //Configurar el campo de texto para la carrera
-                carreraTextField.placeholder = "Escriba una carrera"
-                carreraTextField.borderStyle = .roundedRect
-                carreraTextField.translatesAutoresizingMaskIntoConstraints = false
-                self.view.addSubview(carreraTextField)
-                
-                // Configuracion UIPickerView para facultad y la carrera
-                facultadPickerView.delegate = self
-                facultadPickerView.dataSource = self
-                
-                //Asociar los UIPicker con los UITextField
-                facultadTextField.inputView = facultadPickerView
-                
-                //Boton para cerrar el UIPicker
-                let toolbar = UIToolbar()
-                toolbar.sizeToFit()
-                let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePicking))
-                toolbar.setItems([doneButton], animated: true)
-                
-                facultadTextField.inputAccessoryView = toolbar
-                
-                //Campos de texto Descripción
-                descripcionGeneralTextView.layer.borderColor = UIColor.gray.cgColor
-                descripcionGeneralTextView.layer.borderWidth = 1
-                descripcionGeneralTextView.layer.cornerRadius = 8
-                descripcionGeneralTextView.font = UIFont.systemFont(ofSize: 16)
-                descripcionGeneralTextView.translatesAutoresizingMaskIntoConstraints = false
-                descripcionGeneralTextView.delegate = self
-                contentView.addSubview(descripcionGeneralTextView)
-                
-                //Place Holder para la descripción general
-                descripcionGeneralPlaceHolder.text = "Ingrese una descripción general"
-                descripcionGeneralPlaceHolder.font = UIFont.systemFont(ofSize: 16)
-                descripcionGeneralPlaceHolder.textColor = .lightGray
-                descripcionGeneralPlaceHolder.translatesAutoresizingMaskIntoConstraints = false
-                descripcionGeneralTextView.addSubview(descripcionGeneralPlaceHolder)
-                
-                //Botón para subir plan de estudios pdf.
-                let uploadPDFButton = UIButton(type: .system)
-                uploadPDFButton.setTitle("Subir plan de estudio (PDF)", for: .normal)
-                uploadPDFButton.backgroundColor = .systemBlue
-                uploadPDFButton.setTitleColor(.white, for: .normal)
-                uploadPDFButton.layer.cornerRadius = 8
-                uploadPDFButton.translatesAutoresizingMaskIntoConstraints = false
-                uploadPDFButton.addTarget(self, action: #selector(selectPDF), for: .touchUpInside)
-                contentView.addSubview(uploadPDFButton)
-                
-                //label para mostrar el archivo escogido
-                
-                pdfLabel.text = "Ningún archivo seleccionado"
-                pdfLabel.font = UIFont.systemFont(ofSize: 16)
-                pdfLabel.textColor = .black
-                pdfLabel.textAlignment = .center
-                pdfLabel.layer.borderColor = UIColor.white.cgColor
-                pdfLabel.layer.borderWidth = 2
-                pdfLabel.layer.cornerRadius = 8
-                pdfLabel.clipsToBounds = true
-                pdfLabel.translatesAutoresizingMaskIntoConstraints = false
-                contentView.addSubview(pdfLabel)
-                
-                //Campos de texto perfil del egresado
-                perfilEgresadoTextView.layer.borderColor = UIColor.gray.cgColor
-                perfilEgresadoTextView.layer.borderWidth = 1
-                perfilEgresadoTextView.layer.cornerRadius = 8
-                perfilEgresadoTextView.font = UIFont.systemFont(ofSize: 16)
-                perfilEgresadoTextView.translatesAutoresizingMaskIntoConstraints = false
-                contentView.addSubview(perfilEgresadoTextView)
-                
-                //Place holder para perfil del egresado
-                perfilEgresadoPlaceHolder.text = "Ingrese el perfil del egresado"
-                perfilEgresadoPlaceHolder.font = UIFont.systemFont(ofSize: 16)
-                perfilEgresadoPlaceHolder.textColor = .lightGray
-                perfilEgresadoPlaceHolder.translatesAutoresizingMaskIntoConstraints = false
-                perfilEgresadoTextView.addSubview(perfilEgresadoPlaceHolder)
-                
-                //Campos de texto de oportunidades laborales
-                oportunidadesLaboralesTextView.layer.borderColor = UIColor.gray.cgColor
-                oportunidadesLaboralesTextView.layer.borderWidth = 1
-                oportunidadesLaboralesTextView.layer.cornerRadius = 8
-                oportunidadesLaboralesTextView.font = UIFont.systemFont(ofSize: 16)
-                oportunidadesLaboralesTextView.translatesAutoresizingMaskIntoConstraints = false
-                contentView.addSubview(oportunidadesLaboralesTextView)
-                
-                //Place Holder para la Oportunidades laborales
-                oportunidadesLaboralesPlaceHolder.text = "Ingrese las oportunidades laboreles"
-                oportunidadesLaboralesPlaceHolder.font = UIFont.systemFont(ofSize: 16)
-                oportunidadesLaboralesPlaceHolder.textColor = .lightGray
-                oportunidadesLaboralesPlaceHolder.translatesAutoresizingMaskIntoConstraints = false
-                oportunidadesLaboralesTextView.addSubview(oportunidadesLaboralesPlaceHolder)
+        facultadTextField.placeholder = "Selecciona una facultad"
+        facultadTextField.borderStyle = .roundedRect
+        facultadTextField.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(facultadTextField)
+        
+        //Configurar el campo de texto para la carrera
+        carreraTextField.placeholder = "Escriba una carrera"
+        carreraTextField.borderStyle = .roundedRect
+        carreraTextField.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(carreraTextField)
+        
+        // Configuracion UIPickerView para facultad y la carrera
+        facultadPickerView.delegate = self
+        facultadPickerView.dataSource = self
+        
+        //Asociar los UIPicker con los UITextField
+        facultadTextField.inputView = facultadPickerView
+        
+        //Boton para cerrar el UIPicker
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePicking))
+        toolbar.setItems([doneButton], animated: true)
+        
+        facultadTextField.inputAccessoryView = toolbar
+        
+        //Campos de texto Descripción
+        descripcionGeneralTextView.layer.borderColor = UIColor.gray.cgColor
+        descripcionGeneralTextView.layer.borderWidth = 1
+        descripcionGeneralTextView.layer.cornerRadius = 8
+        descripcionGeneralTextView.font = UIFont.systemFont(ofSize: 16)
+        descripcionGeneralTextView.translatesAutoresizingMaskIntoConstraints = false
+        descripcionGeneralTextView.delegate = self
+        contentView.addSubview(descripcionGeneralTextView)
+        
+        //Place Holder para la descripción general
+        descripcionGeneralPlaceHolder.text = "Ingrese una descripción general"
+        descripcionGeneralPlaceHolder.font = UIFont.systemFont(ofSize: 16)
+        descripcionGeneralPlaceHolder.textColor = .lightGray
+        descripcionGeneralPlaceHolder.translatesAutoresizingMaskIntoConstraints = false
+        descripcionGeneralTextView.addSubview(descripcionGeneralPlaceHolder)
+        
+        //Botón para subir plan de estudios pdf.
+        let uploadPDFButton = UIButton(type: .system)
+        uploadPDFButton.setTitle("Subir plan de estudio (PDF)", for: .normal)
+        uploadPDFButton.backgroundColor = .systemBlue
+        uploadPDFButton.setTitleColor(.white, for: .normal)
+        uploadPDFButton.layer.cornerRadius = 8
+        uploadPDFButton.translatesAutoresizingMaskIntoConstraints = false
+        uploadPDFButton.addTarget(self, action: #selector(selectPDF), for: .touchUpInside)
+        contentView.addSubview(uploadPDFButton)
+        
+        //label para mostrar el archivo escogido
+        
+        pdfLabel.text = "Ningún archivo seleccionado"
+        pdfLabel.font = UIFont.systemFont(ofSize: 16)
+        pdfLabel.textColor = .black
+        pdfLabel.textAlignment = .center
+        pdfLabel.layer.borderColor = UIColor.white.cgColor
+        pdfLabel.layer.borderWidth = 2
+        pdfLabel.layer.cornerRadius = 8
+        pdfLabel.clipsToBounds = true
+        pdfLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(pdfLabel)
+        
+        //Campos de texto perfil del egresado
+        perfilEgresadoTextView.layer.borderColor = UIColor.gray.cgColor
+        perfilEgresadoTextView.layer.borderWidth = 1
+        perfilEgresadoTextView.layer.cornerRadius = 8
+        perfilEgresadoTextView.font = UIFont.systemFont(ofSize: 16)
+        perfilEgresadoTextView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(perfilEgresadoTextView)
+        
+        //Place holder para perfil del egresado
+        perfilEgresadoPlaceHolder.text = "Ingrese el perfil del egresado"
+        perfilEgresadoPlaceHolder.font = UIFont.systemFont(ofSize: 16)
+        perfilEgresadoPlaceHolder.textColor = .lightGray
+        perfilEgresadoPlaceHolder.translatesAutoresizingMaskIntoConstraints = false
+        perfilEgresadoTextView.addSubview(perfilEgresadoPlaceHolder)
+        
+        //Campos de texto de oportunidades laborales
+        oportunidadesLaboralesTextView.layer.borderColor = UIColor.gray.cgColor
+        oportunidadesLaboralesTextView.layer.borderWidth = 1
+        oportunidadesLaboralesTextView.layer.cornerRadius = 8
+        oportunidadesLaboralesTextView.font = UIFont.systemFont(ofSize: 16)
+        oportunidadesLaboralesTextView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(oportunidadesLaboralesTextView)
+        
+        //Place Holder para la Oportunidades laborales
+        oportunidadesLaboralesPlaceHolder.text = "Ingrese las oportunidades laboreles"
+        oportunidadesLaboralesPlaceHolder.font = UIFont.systemFont(ofSize: 16)
+        oportunidadesLaboralesPlaceHolder.textColor = .lightGray
+        oportunidadesLaboralesPlaceHolder.translatesAutoresizingMaskIntoConstraints = false
+        oportunidadesLaboralesTextView.addSubview(oportunidadesLaboralesPlaceHolder)
 
-                //Campo de Requisito de ingreso
-                requisitosIngresoTextView.layer.borderColor = UIColor.gray.cgColor
-                requisitosIngresoTextView.layer.borderWidth = 1
-                requisitosIngresoTextView.layer.cornerRadius = 8
-                requisitosIngresoTextView.font = UIFont.systemFont(ofSize: 16)
-                requisitosIngresoTextView.translatesAutoresizingMaskIntoConstraints = false
-                contentView.addSubview(requisitosIngresoTextView)
-                
-                //Place holder de Requisitos de ingreso
-                requisitosIngresoPlaceHolder.text = "Ingresar los requisitos de ingreso"
-                requisitosIngresoPlaceHolder.font = UIFont.systemFont(ofSize: 16)
-                requisitosIngresoPlaceHolder.textColor = .lightGray
-                requisitosIngresoPlaceHolder.translatesAutoresizingMaskIntoConstraints = false
-                requisitosIngresoTextView.addSubview(requisitosIngresoPlaceHolder)
+        //Campo de Requisito de ingreso
+        requisitosIngresoTextView.layer.borderColor = UIColor.gray.cgColor
+        requisitosIngresoTextView.layer.borderWidth = 1
+        requisitosIngresoTextView.layer.cornerRadius = 8
+        requisitosIngresoTextView.font = UIFont.systemFont(ofSize: 16)
+        requisitosIngresoTextView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(requisitosIngresoTextView)
         
-                //Campo de enlace Información
-                enlaceInformacionTextView.layer.borderColor = UIColor.gray.cgColor
-                enlaceInformacionTextView.layer.borderWidth = 1
-                enlaceInformacionTextView.layer.cornerRadius = 8
-                enlaceInformacionTextView.font = UIFont.systemFont(ofSize: 16)
-                enlaceInformacionTextView.translatesAutoresizingMaskIntoConstraints = false
-                contentView.addSubview(enlaceInformacionTextView)
-                
-                //Place holder enlace Información
-                enlaceInformacionPlaceHolder.text = "Ingresar el enlace"
-                enlaceInformacionPlaceHolder.font = UIFont.systemFont(ofSize: 16)
-                enlaceInformacionPlaceHolder.textColor = .lightGray
-                enlaceInformacionPlaceHolder.translatesAutoresizingMaskIntoConstraints = false
-                enlaceInformacionTextView.addSubview(enlaceInformacionPlaceHolder)
+        //Place holder de Requisitos de ingreso
+        requisitosIngresoPlaceHolder.text = "Ingresar los requisitos de ingreso"
+        requisitosIngresoPlaceHolder.font = UIFont.systemFont(ofSize: 16)
+        requisitosIngresoPlaceHolder.textColor = .lightGray
+        requisitosIngresoPlaceHolder.translatesAutoresizingMaskIntoConstraints = false
+        requisitosIngresoTextView.addSubview(requisitosIngresoPlaceHolder)
+
+        //Campo de enlace Información
+        enlaceInformacionTextView.layer.borderColor = UIColor.gray.cgColor
+        enlaceInformacionTextView.layer.borderWidth = 1
+        enlaceInformacionTextView.layer.cornerRadius = 8
+        enlaceInformacionTextView.font = UIFont.systemFont(ofSize: 16)
+        enlaceInformacionTextView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(enlaceInformacionTextView)
         
+        //Place holder enlace Información
+        enlaceInformacionPlaceHolder.text = "Ingresar el enlace"
+        enlaceInformacionPlaceHolder.font = UIFont.systemFont(ofSize: 16)
+        enlaceInformacionPlaceHolder.textColor = .lightGray
+        enlaceInformacionPlaceHolder.translatesAutoresizingMaskIntoConstraints = false
+        enlaceInformacionTextView.addSubview(enlaceInformacionPlaceHolder)
+
+        //Configuración del botón para subir imagen
+        uploadImageButton.setTitle("Subir Imagen", for: .normal)
+        uploadImageButton.backgroundColor = .systemBlue
+        uploadImageButton.setTitleColor(.white, for: .normal)
+        uploadImageButton.layer.cornerRadius = 8
+        uploadImageButton.translatesAutoresizingMaskIntoConstraints = false
+        uploadImageButton.addTarget(self, action: #selector(selectImage), for: .touchUpInside)
+        contentView.addSubview(uploadImageButton)
+
+        //configurar UIImageView para mostrar la imagen seleccionada
+        imageUploadView.contentMode = .scaleAspectFit
+        imageUploadView.layer.borderColor = UIColor.gray.cgColor
+        imageUploadView.layer.borderWidth = 1
+        imageUploadView.layer.cornerRadius = 8
+        imageUploadView.clipsToBounds = true
+        imageUploadView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(imageUploadView)
                 
                 //Configurar AutoLayout
                 NSLayoutConstraint.activate([
@@ -402,8 +423,19 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
                     enlaceInformacionPlaceHolder.topAnchor.constraint(equalTo: enlaceInformacionTextView.topAnchor, constant: 8),
                     enlaceInformacionPlaceHolder.leadingAnchor.constraint(equalTo: enlaceInformacionTextView.leadingAnchor, constant: 5),
                     
+                    //Botón imagen
+                    uploadImageButton.topAnchor.constraint(equalTo: enlaceInformacionTextView.bottomAnchor, constant: 20),
+                    uploadImageButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+                    uploadImageButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+                    uploadImageButton.heightAnchor.constraint(equalToConstant: 40),
+                    
+                    imageUploadView.topAnchor.constraint(equalTo: uploadImageButton.bottomAnchor, constant: 20),
+                    imageUploadView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+                    imageUploadView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  -20),
+                    imageUploadView.heightAnchor.constraint(equalToConstant: 200),
+                    
                     // Botón Registrar
-                    registerButton.topAnchor.constraint(equalTo: enlaceInformacionTextView.bottomAnchor, constant: 20),
+                    registerButton.topAnchor.constraint(equalTo: imageUploadView.bottomAnchor, constant: 20),
                     registerButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
                     registerButton.widthAnchor.constraint(equalToConstant: 100),
                     registerButton.heightAnchor.constraint(equalToConstant: 40),
@@ -451,20 +483,79 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     
     @objc func selectPDF() {
-        let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.pdf"], in: .import)
+        let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.data", "public.content", "com.adobe.pdf"], in: .import)
         documentPicker.delegate = self
         documentPicker.allowsMultipleSelection = false
         present(documentPicker, animated: true, completion: nil)
     }
     
-}
+    //Selector de imagen
+    @objc func selectImage() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.delegate = self
+        present(imagePicker, animated: true, completion: nil)
+    }
+
+    // delegado para manejar la imagen seleccionada
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
+        if let image = info[.originalImage] as? UIImage {
+            imageUploadView.image = image
+            
+            //Guardar la imagen como archivo local
+            if let imageData = image.jpegData(compressionQuality: 0.8) {
+                let fileManager = FileManager.default
+                let documentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
+                let fileURL = documentDirectory.appendingPathComponent("uploaded_image.jpg")
+                try? imageData.write(to: fileURL)
+                selectedImageURL = fileURL
+                print("Imagen guardada en: \(fileURL)")
+            }
+        }
+        dismiss(animated: true, completion: nil)
+    }
+
+    
+} //Fin de extensión Register
 
 extension RegisterViewController: UIDocumentPickerDelegate {
-        func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt urls: [URL]) {
-            guard let selectedFileURL = urls.first else { return }
-            pdfLabel.text = "Archivo: \(selectedFileURL.lastPathComponent)"
-        }
+            func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+                guard let selectedFileURL = urls.first else {
+                    print("no se seleccionó ningún archivo.")
+                    return
+                }
+                
+                do {
+                    //Obtener el directorio de documentos de la app
+                    let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                    
+                    // crear la url de destino
+                    let destinationURL = documentsDirectory.appendingPathComponent(selectedFileURL.lastPathComponent)
+                    
+                    //Eliminar archivo previo si ya existe
+                    if FileManager.default.fileExists(atPath: destinationURL.path){
+                        try FileManager.default.removeItem(at: destinationURL)
+                    }
+                    
+                    //Copiar el archivo al directorio de documentos
+                    try FileManager.default.copyItem(at: selectedFileURL, to: destinationURL)
+                    
+                    //Actualizar el label con el nombre del archivo
+                    pdfLabel.text = "Archivo: \(destinationURL.lastPathComponent)"
+                    let fileSize = try? FileManager.default.attributesOfItem(atPath: selectedFileURL.path)[.size] as? Int64
+                    print("Tamaño del archivo: \(fileSize ?? 0) bytes")
+                    
+                    print("Archivo copiado a: \(destinationURL)")
+                } catch {
+                    print("Error al copiar arcihivo: \(error.localizedDescription)")
+                }
+            }
+    
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+        print("El usuario canceló la selección del archivo.")
     }
+}
+
 
 extension UIView {
     var currentFirstResponder: UIView? {
